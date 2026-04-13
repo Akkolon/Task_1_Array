@@ -1,4 +1,4 @@
-package arrayapp.entity;
+package com.Bazylev.arrayapp.entity;
 
 public abstract class AbstractArrayWrapper {
 

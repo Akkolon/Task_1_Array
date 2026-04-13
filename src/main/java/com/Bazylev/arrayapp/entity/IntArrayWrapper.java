@@ -1,4 +1,4 @@
-package arrayapp.entity;
+package com.Bazylev.arrayapp.entity;
 
 import java.util.Arrays;
 

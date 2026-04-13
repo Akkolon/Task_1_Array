@@ -1,6 +1,6 @@
-package arrayapp.validation;
+package com.Bazylev.arrayapp.validation;
 
-import arrayapp.exception.ArrayProcessingException;
+import com.Bazylev.arrayapp.exception.ArrayProcessingException;
 
 public interface DataValidator {
 

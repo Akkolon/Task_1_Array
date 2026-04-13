@@ -1,6 +1,6 @@
-package arrayapp.validation;
+package com.Bazylev.arrayapp.validation;
 
-import arrayapp.exception.ArrayProcessingException;
+import com.Bazylev.arrayapp.exception.ArrayProcessingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.util.ArrayList;

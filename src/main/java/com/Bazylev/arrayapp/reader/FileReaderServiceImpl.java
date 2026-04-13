@@ -1,6 +1,6 @@
-package arrayapp.reader;
+package com.Bazylev.arrayapp.reader;
 
-import arrayapp.exception.ArrayProcessingException;
+import com.Bazylev.arrayapp.exception.ArrayProcessingException;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package arrayapp.service;
+package com.Bazylev.arrayapp.service;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

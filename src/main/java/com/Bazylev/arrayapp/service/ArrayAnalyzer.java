@@ -1,4 +1,4 @@
-package arrayapp.service;
+package com.Bazylev.arrayapp.service;
 
 import java.util.Optional;
 
