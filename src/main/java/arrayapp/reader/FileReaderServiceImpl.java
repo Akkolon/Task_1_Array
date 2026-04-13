@@ -27,7 +27,7 @@ public class FileReaderServiceImpl implements FileReaderService {
             List<String> allLines = Files.readAllLines(path);
 
             for (String line : allLines) {
-                if (line != null && !line.trim().isEmpty()) {
+                if (line != null && !line.isBlank()){
                     lines.add(line);
                 } else {
                     LOGGER.debug("Skipping empty line");

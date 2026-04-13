@@ -16,12 +16,12 @@ public class IntArrayValidator implements DataValidator {
     public boolean validateLine(String line) {
         LOGGER.debug("Validating line: {}", line);
 
-        if (line == null || line.trim().isEmpty()) {
+        if (line == null || line.isBlank()) {
             LOGGER.debug("Line is null or empty - invalid");
             return false;
         }
 
-        String[] parts = SEPARATOR_PATTERN.split(line.trim());
+        String[] parts = SEPARATOR_PATTERN.split(line.strip());
 
         for (String part : parts) {
             if (!NUMBER_PATTERN.matcher(part).matches()) {
@@ -38,7 +38,7 @@ public class IntArrayValidator implements DataValidator {
     public int[] parseAndValidate(String line) throws ArrayProcessingException {
         LOGGER.info("Parsing and validating line: {}", line);
 
-        if (line == null || line.trim().isEmpty()) {
+        if (line == null || line.isBlank()) {
             throw new ArrayProcessingException("Line is null or empty");
         }
 
@@ -46,7 +46,7 @@ public class IntArrayValidator implements DataValidator {
             throw new ArrayProcessingException("Invalid line format: " + line);
         }
 
-        String[] parts = SEPARATOR_PATTERN.split(line.trim());
+        String[] parts = SEPARATOR_PATTERN.split(line.strip());
         List<Integer> validNumbers = new ArrayList<>();
 
         for (String part : parts) {

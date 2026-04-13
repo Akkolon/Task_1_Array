@@ -1,17 +1,73 @@
-package org.example;
+package arrayapp;
 
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
+import arrayapp.entity.AbstractArrayWrapper;
+import arrayapp.exception.ArrayProcessingException;
+import arrayapp.factory.ArrayFactory;
+import arrayapp.factory.IntArrayFactory;
+import arrayapp.reader.FileReaderService;
+import arrayapp.reader.FileReaderServiceImpl;
+import arrayapp.service.ArrayAnalyzer;
+import arrayapp.service.ArrayAnalyzerImpl;
+import arrayapp.service.ArraySorter;
+import arrayapp.service.ArraySorterImpl;
+import arrayapp.validation.DataValidator;
+import arrayapp.validation.IntArrayValidator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+import java.util.List;
+import java.util.Optional;
+
 public class Main {
-    static void main() {
-        //TIP Press <shortcut actionId="ShowIntentionActions"/> with your caret at the highlighted text
-        // to see how IntelliJ IDEA suggests fixing it.
-        IO.println(String.format("Hello and welcome!"));
+    private static final Logger LOGGER = LogManager.getLogger(Main.class);
 
-        for (int i = 1; i <= 5; i++) {
-            //TIP Press <shortcut actionId="Debug"/> to start debugging your code. We have set one <icon src="AllIcons.Debugger.Db_set_breakpoint"/> breakpoint
-            // for you, but you can always add more by pressing <shortcut actionId="ToggleLineBreakpoint"/>.
-            IO.println("i = " + i);
+    public static void main(String[] args) {
+        String filePath = "data/arrays.txt";
+
+        FileReaderService fileReader = new FileReaderServiceImpl();
+        DataValidator validator = new IntArrayValidator();
+        ArrayFactory factory = new IntArrayFactory();
+        ArrayAnalyzer analyzer = new ArrayAnalyzerImpl();
+        ArraySorter sorter = new ArraySorterImpl();
+
+        try {
+            List<String> lines = fileReader.readLines(filePath);
+
+            for (int i = 0; i < lines.size(); i++) {
+                String line = lines.get(i);
+                LOGGER.info("Processing line {}: {}", i + 1, line);
+
+                try {
+                    int[] parsedArray = validator.parseAndValidate(line);
+                    processArray(parsedArray, analyzer, sorter, factory);
+                } catch (ArrayProcessingException e) {
+                    LOGGER.error("Failed to process line {}: {}", i + 1, e.getMessage());
+                }
+            }
+
+        } catch (ArrayProcessingException e) {
+            LOGGER.error("Application failed: {}", e.getMessage(), e);
         }
+    }
+
+    private static void processArray(int[] parsedArray, ArrayAnalyzer analyzer,
+                                     ArraySorter sorter, ArrayFactory factory) {
+        AbstractArrayWrapper arrayWrapper = factory.createArray(parsedArray);
+        LOGGER.info("Array created: {}", arrayWrapper);
+
+        Optional<Integer> min = analyzer.findMin(arrayWrapper.getArray());
+        Optional<Integer> max = analyzer.findMax(arrayWrapper.getArray());
+        Optional<Integer> sum = analyzer.calculateSum(arrayWrapper.getArray());
+        Optional<Double> average = analyzer.calculateAverage(arrayWrapper.getArray());
+
+        min.ifPresent(value -> LOGGER.info("Min: {}", value));
+        max.ifPresent(value -> LOGGER.info("Max: {}", value));
+        sum.ifPresent(value -> LOGGER.info("Sum: {}", value));
+        average.ifPresent(value -> LOGGER.info("Average: {}", value));
+
+        int[] bubbleSorted = sorter.bubbleSort(arrayWrapper.getArray());
+        LOGGER.info("Bubble sort result: {}", java.util.Arrays.toString(bubbleSorted));
+
+        int[] quickSorted = sorter.quickSort(arrayWrapper.getArray());
+        LOGGER.info("Quick sort result: {}", java.util.Arrays.toString(quickSorted));
     }
 }
