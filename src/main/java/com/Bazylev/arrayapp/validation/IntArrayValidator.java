@@ -13,12 +13,12 @@ public class IntArrayValidator implements ArrayValidator {
     public boolean isValid(String line) {
         LOGGER.debug("Validating line: {}", line);
 
-        if (line == null || line.trim().isEmpty()) {
+        if (line == null || line.isBlank()) {
             LOGGER.debug("Line is null or empty - invalid");
             return false;
         }
 
-        String[] parts = SEPARATOR_PATTERN.split(line.trim());
+        String[] parts = SEPARATOR_PATTERN.split(line.strip());
 
         for (String part : parts) {
             if (!NUMBER_PATTERN.matcher(part).matches()) {

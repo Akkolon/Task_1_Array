@@ -15,11 +15,11 @@ public class IntArrayParser implements ArrayParser {
     public int[] parse(String line) throws ArrayProcessingException {
         LOGGER.info("Parsing line: {}", line);
 
-        if (line == null || line.trim().isEmpty()) {
+        if (line == null || line.isBlank()) {
             throw new ArrayProcessingException("Cannot parse null or empty line");
         }
 
-        String[] parts = SEPARATOR_PATTERN.split(line.trim());
+        String[] parts = SEPARATOR_PATTERN.split(line.strip());
         List<Integer> numbers = new ArrayList<>();
 
         for (String part : parts) {
