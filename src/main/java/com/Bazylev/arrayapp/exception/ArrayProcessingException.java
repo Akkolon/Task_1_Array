@@ -1,4 +1,4 @@
-package com.Bazylev.arrayapp.exception;
+package com.bazylev.arrayapp.exception;
 
 public class ArrayProcessingException extends Exception {
 

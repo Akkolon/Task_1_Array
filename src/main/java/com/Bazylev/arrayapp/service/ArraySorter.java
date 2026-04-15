@@ -1,4 +1,4 @@
-package com.Bazylev.arrayapp.service;
+package com.bazylev.arrayapp.service;
 
 public interface ArraySorter {
 

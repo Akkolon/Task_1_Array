@@ -1,6 +1,6 @@
-package com.Bazylev.arrayapp.reader;
+package com.bazylev.arrayapp.reader;
 
-import com.Bazylev.arrayapp.exception.ArrayProcessingException;
+import com.bazylev.arrayapp.exception.ArrayProcessingException;
 import java.util.List;
 
 public interface FileReaderService {

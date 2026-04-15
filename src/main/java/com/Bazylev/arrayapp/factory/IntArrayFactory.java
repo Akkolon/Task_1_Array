@@ -1,7 +1,7 @@
-package com.Bazylev.arrayapp.factory;
+package com.bazylev.arrayapp.factory;
 
-import com.Bazylev.arrayapp.entity.AbstractArrayWrapper;
-import com.Bazylev.arrayapp.entity.IntArrayWrapper;
+import com.bazylev.arrayapp.entity.AbstractArrayWrapper;
+import com.bazylev.arrayapp.entity.IntArrayWrapper;
 
 public class IntArrayFactory implements ArrayFactory {
 
